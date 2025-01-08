@@ -1,7 +1,7 @@
 <div dir="ltr" style="text-align: right; font-family: Tahoma, Arial, sans-serif;">
 
 <h1>🛒 فروشگاه آنلاین</h1>
-<img src="https://s32.picofile.com/file/8481946942/Demo_project.png" loading="lazy" alt="banner">
+<img src="https://s32.picofile.com/file/8481947126/shoppingcart_demo_.png" loading="lazy" alt="banner">
 <h2>🚀 توضیحات پروژه</h2>
 <p>
 این پروژه یک وب‌سایت فروشگاهی است که با استفاده از فناوری‌های زیر توسعه داده شده است:
