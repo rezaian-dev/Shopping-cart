@@ -92,7 +92,7 @@ ShoppingCart
 
 📧 ایمیل:rezaian.developer@gmail.com
 
-🌐 گیت‌هاب:مشاهده پروژه[https://github.com/example/online-shop] 
+🌐 گیت‌هاب:مشاهده پروژه[https://rezaian-dev.github.io/shopping-cart] 
 
 ---
 
