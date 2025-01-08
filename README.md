@@ -48,7 +48,7 @@
 </ul>
 
 <h3>📂 ساختار پروژه</h3>
-<pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; direction: ltr; text-align: left;">
+<pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; direction: ltr; text-align: center;">
 shopping-cart
 ├── assets/
 │   ├── css/
