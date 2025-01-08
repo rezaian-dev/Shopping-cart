@@ -183,6 +183,9 @@ const createCartList = () => {
 
 // Function to update the product count in the cart
 const updateUserCart = (name, count) => {
+    if(count ==="0"){
+    removeProduct(formattedId(name))
+  }
   let quantityInputElement = document.getElementById(formattedId(name));
   let cartItem = userCartItems.find((item) => item.name === name);
 
