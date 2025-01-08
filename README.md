@@ -69,7 +69,7 @@ ShoppingCart
    - ابتدا پروژه را کلون کنید یا فایل زیپ آن را دانلود کنید.
 
    ```bash
-   git clone https://github.com/example/online-shop.git
+   git clone https://github.com/rezaian-dev/shopping-cart.git
    ```
 
 2. **🌐 باز کردن در مرورگر**:
