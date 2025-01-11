@@ -21,10 +21,11 @@ let totalPrice = document.querySelector(".cart__total-price");
 // Configuring SweetAlert to be used for confirmation dialogs.
 const SwalConfig = {
   showCancelButton: true,
-  confirmButtonColor: "#d33",
+  // confirmButtonColor: "#d33",
   cancelButtonColor: "#0d6efd",
   icon: "warning",
   confirmButtonText: "Yes",
+  dangerMode:true,
   cancelButtonText: "Cancel"
 };
 
