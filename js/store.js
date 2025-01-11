@@ -21,7 +21,6 @@ let totalPrice = document.querySelector(".cart__total-price");
 // Configuring SweetAlert to be used for confirmation dialogs.
 const SwalConfig = {
   showCancelButton: true,
-  // confirmButtonColor: "#d33",
   cancelButtonColor: "#0d6efd",
   icon: "warning",
   confirmButtonText: "Yes",
@@ -126,10 +125,10 @@ const removeAllProduct = () => {
       cartTotalPrice = 0;  // Set total price to zero.
 
       Swal.fire({
+        ...SwalConfig,
         title: "Cart Cleared",
         text: "Your shopping cart has been successfully cleared.",
         icon: "success",
-        confirmButtonColor: "#0d6efd"
       });
     }
   });
