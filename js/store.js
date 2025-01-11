@@ -100,10 +100,10 @@ const removeProduct = (name) => {
       saveDataLocalStorage();  // Save updated cart to LocalStorage.
 
       Swal.fire({
+        ...SwalConfig,
         title: "Product Removed",
         text: `"${name}" has been successfully removed from your shopping cart.`,
         icon: "success",
-        confirmButtonColor: "#0d6efd"
       });
     }
   });
