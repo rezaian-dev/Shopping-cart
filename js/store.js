@@ -1,37 +1,37 @@
-// Store product data with properties such as id, name, image path, and price.
+// Store product data with properties like id, name, image path, and price
 let storeProducts = [
-  { id: 1, name: "Album 1", img: "assets/Images/products/Album-1.webp", price: 5000000 },
-  { id: 2, name: "Album 2", img: "assets/Images/products/Album-2.webp", price: 1000000 },
-  { id: 3, name: "Album 3", img: "assets/Images/products/Album-3.webp", price: 2550000 },
-  { id: 4, name: "Album 4", img: "assets/Images/products/Album-4.webp", price: 3000000 },
-  { id: 5, name: "Coffee", img: "assets/Images/products/Coffee.webp", price: 55000000 },
-  { id: 6, name: "Shirt", img: "assets/Images/products/Shirt.webp", price: 6500000 }
+  {id: 1,name: "Album 1",img: "assets/Images/products/Album-1.webp",price: 5000000,},
+  {id: 2,name: "Album 2",img: "assets/Images/products/Album-2.webp",price: 1000000,},
+  {id: 3,name: "Album 3",img: "assets/Images/products/Album-3.webp",price: 2550000,},
+  {id: 4,name: "Album 4",img: "assets/Images/products/Album-4.webp",price: 3000000,},
+  {id: 5,name: "Coffee",img: "assets/Images/products/Coffee.webp",price: 55000000,},
+  {id: 6,name: "Shirt",img: "assets/Images/products/Shirt.webp",price: 6500000,},
 ];
 
-// Retrieve user's shopping cart items and total price from LocalStorage, fallback to defaults if not available.
+// Retrieve user's shopping cart data from LocalStorage
+// If no data exists, use empty default values
 let userCartItems = JSON.parse(localStorage.getItem("Products")) || [];
 let cartTotalPrice = JSON.parse(localStorage.getItem("TotalPrice")) || 0;
 
-// DOM element references for manipulating the page content.
+// Select DOM elements needed for page interaction
 const productsContainer = document.querySelector(".store__products-container");
 const removeAllBtn = document.querySelector(".cart__remove-all");
 const cartItemsContainer = document.querySelector(".cart__items");
 let totalPrice = document.querySelector(".cart__total-price");
 
-// Configuring SweetAlert to be used for confirmation dialogs.
+// Default configuration for SweetAlert confirmation dialogs
 const SwalConfig = {
-  showCancelButton: true,
-  cancelButtonColor: "#0d6efd",
-  icon: "warning",
-  confirmButtonText: "Yes",
-  dangerMode:true,
-  cancelButtonText: "Cancel"
+  showCancelButton: true,                // Show cancel button
+  cancelButtonColor: "#0d6efd",          // Cancel button color
+  cancelButtonText: "Cancel",            // Cancel button text
+  confirmButtonColor: "#fc0303",         // Confirm button color
+  confirmButtonText: "OK",               // Confirm button text
 };
 
-// Function to display products in the store, called on page load.
+// Display products in the store page
 const showStoreProducts = () => {
   storeProducts.forEach(({ name, img, price }) => {
-    // Adding HTML for each product in the store.
+    // Create product card for each item with relevant information
     productsContainer.insertAdjacentHTML(
       "beforeend",
       `<div class="col">
@@ -48,100 +48,128 @@ const showStoreProducts = () => {
       </div>`
     );
   });
-  calculateTotalPrice();  // Recalculate total price after loading products.
-  createCartList();  // Display cart contents if any.
-}
+  calculateTotalPrice();     // Calculate total price after displaying products
+  createCartList();         // Display cart contents
+};
 
-// Function to save cart data to LocalStorage for persistence.
+// Save cart data to browser's local storage
 const saveDataLocalStorage = () => {
   localStorage.setItem("Products", JSON.stringify(userCartItems));
   localStorage.setItem("TotalPrice", JSON.stringify(cartTotalPrice));
-}
+};
 
-// Helper function to format the product name as a valid HTML ID.
-const formatNameToId = (name) => name.replace(" ", "-");  // Replace spaces with hyphens for valid IDs.
+// Convert product name to valid HTML ID by replacing spaces with hyphens
+const formatNameToId = (name) => name.replace(" ", "-");
 
+// Filter cart products based on value and property type
 const filterUserCart = (filterValue, propertyKey) => {
   const filterBy = propertyKey === "name" ? "name" : "count";
-  userCartItems = userCartItems.filter(product => product[filterBy] !== filterValue);
-}
+  userCartItems = userCartItems.filter(
+    (product) => product[filterBy] !== filterValue
+  );
+};
 
-// Function to add a product to the cart. If the product already exists, it updates its count.
+// Add product to shopping cart
 const addToCart = (name, img, price) => {
   if (userCartItems.some((product) => product.name === name)) {
-    updateUserCart(name, null); // If product exists, update its quantity.
+    updateUserCart(name, null);    // Update quantity if product already exists in cart
   } else {
-    // If product doesn't exist in the cart, add it with a quantity of 1.
-    const newProduct = { id: userCartItems.length, name, img, price: +price, count: 1 };
+    // Add new product to cart with initial quantity of 1
+    const newProduct = {
+      id: userCartItems.length,
+      name,
+      img,
+      price: +price,
+      count: 1,
+    };
     userCartItems.push(newProduct);
-    createCartList(); // Refresh the cart items list.
+    createCartList();
   }
-  saveDataLocalStorage(); // Save cart data.
-  calculateTotalPrice(); // Update the total price.
-}
+  saveDataLocalStorage();
+  calculateTotalPrice();
+  
+  // Display success message
+  iziToast.success({
+    title: "Success",
+    message: `The ${name} has been successfully added to your cart!`,
+    position: "topRight",
+    backgroundColor: "#03ff6c",
+    messageColor: "#000",
+    iconColor: "white",
+    timeout: 1000,
+  });
+};
 
-// Function to calculate the total price based on the cart contents.
+// Calculate total price of products in shopping cart
 const calculateTotalPrice = () => {
-  cartTotalPrice = userCartItems.reduce((sum, product) => sum + product.price * product.count, 0);
-  totalPrice.innerHTML = `$${cartTotalPrice.toLocaleString()}`; // Update displayed total price.
-}
+  cartTotalPrice = userCartItems.reduce(
+    (sum, product) => sum + product.price * product.count,
+    0
+  );
+  totalPrice.innerHTML = `$${cartTotalPrice.toLocaleString()}`;
+};
 
-// Function to remove a product from the cart with a confirmation prompt.
+// Remove specific product from cart with confirmation dialog
 const removeProduct = (name) => {
   Swal.fire({
     ...SwalConfig,
     title: "Remove Product?",
-    text: `Are you sure you want to remove "${name}" from your cart? This product will no longer be in your shopping list.`
+    text: `Are you sure you want to remove "${name}" from your cart? This product will no longer be in your shopping list.`,
+    icon: "warning",
   }).then((result) => {
     if (result.isConfirmed) {
-      filterUserCart(name, "name"); // Remove product by name.
-      createCartList();  // Update cart list.
-      calculateTotalPrice();  // Recalculate total price.
-      saveDataLocalStorage();  // Save updated cart to LocalStorage.
+      filterUserCart(name, "name");
+      createCartList();
+      calculateTotalPrice();
+      saveDataLocalStorage();
 
+      // Display success message after removal
       Swal.fire({
-        ...SwalConfig,
         title: "Product Removed",
         text: `"${name}" has been successfully removed from your shopping cart.`,
         icon: "success",
+        confirmButtonColor: "#0d6efd",
       });
     }
   });
-}
+};
 
-// Function to remove all products from the cart with a confirmation prompt.
+// Remove all products from cart with confirmation dialog
 const removeAllProduct = () => {
   Swal.fire({
     ...SwalConfig,
     title: "Clear Entire Cart?",
-    text: "Are you sure you want to clear your shopping cart? This action will remove all products and cannot be undone."
+    text: "Are you sure you want to clear your shopping cart? This action will remove all products and cannot be undone.",
+    icon: "warning",
   }).then((result) => {
     if (result.isConfirmed) {
-      cartItemsContainer.innerHTML = "";  // Clear cart list in the DOM.
-      userCartItems = [];  // Reset cart items.
-      createCartList();  // Refresh the cart.
-      calculateTotalPrice();  // Recalculate total price.
-      saveDataLocalStorage();  // Save empty cart to LocalStorage.
-      cartTotalPrice = 0;  // Set total price to zero.
+      cartItemsContainer.innerHTML = "";
+      userCartItems = [];
+      createCartList();
+      calculateTotalPrice();
+      saveDataLocalStorage();
+      cartTotalPrice = 0;
 
+      // Display success message after clearing cart
       Swal.fire({
-        ...SwalConfig,
+        confirmButtonColor: "#0d6efd",
+        confirmButtonText: "OK",
+        icon: "success",
         title: "Cart Cleared",
         text: "Your shopping cart has been successfully cleared.",
-        icon: "success",
       });
     }
   });
-}
+};
 
-// Function to render the current cart items and their quantities in the DOM.
+// Create and display list of products in shopping cart
 const createCartList = () => {
-  // Toggle the "Remove All" button based on cart status.
+  // Enable/disable remove all button based on cart contents
   removeAllBtn.disabled = userCartItems.length === 0;
-  filterUserCart("0","count")
-  cartItemsContainer.innerHTML = "";  // Clear current cart list in the DOM.
+  filterUserCart("0", "count");
+  cartItemsContainer.innerHTML = "";
 
-  // If the cart contains items, display them; otherwise, show a message indicating the cart is empty.
+  // Display cart products or empty cart message
   if (userCartItems.length) {
     userCartItems.forEach(({ name, img, price, count }) => {
       cartItemsContainer.insertAdjacentHTML(
@@ -155,7 +183,9 @@ const createCartList = () => {
           </td>
           <td class="text-center" data-label="Price">$${price.toLocaleString()}</td>
           <td class="text-center" data-label="Quantity">
-            <input type="number" class="form-control cart-item-quantity mx-md-auto" style="max-width: 100px;" value="${count}" min="1" id="${formatNameToId(name)}" onChange="updateUserCart('${name}', event.target.value)">
+            <input type="number" class="form-control cart-item-quantity mx-md-auto" style="max-width: 100px;" value="${count}" min="1" id="${formatNameToId(
+          name
+        )}" onChange="updateUserCart('${name}', event.target.value)">
           </td>
           <td class="text-center" data-label="Action">
             <button class="btn btn-link text-danger p-0 cart-item-remove" onClick="removeProduct('${name}')">
@@ -168,8 +198,10 @@ const createCartList = () => {
       );
     });
   } else {
-    // Display an empty cart message if there are no items in the cart.
-    cartItemsContainer.insertAdjacentHTML("beforeend", `
+    // Display empty cart message
+    cartItemsContainer.insertAdjacentHTML(
+      "beforeend",
+      `
       <tr class="text-center">
         <td colspan="4" class="empty-cart-message">
           <div class="alert alert-danger w-100" role="alert">
@@ -177,25 +209,26 @@ const createCartList = () => {
           </div>
         </td>
       </tr>
-    `);
+    `
+    );
   }
-}
+};
 
-// Function to update the quantity of a specific product in the cart.
+// Update product quantity in shopping cart
 const updateUserCart = (name, count) => {
-  if(count === "0") {
-    removeProduct(name); // If count is zero, remove the product from cart.
+  if (count === "0") {
+    removeProduct(name);    // Remove product if quantity becomes zero
   }
   let quantityInputElement = document.getElementById(formatNameToId(name));
   let cartItem = userCartItems.find((item) => item.name === name);
 
-  cartItem.count = count || ++cartItem.count;  // Update quantity or increment if not specified.
-  quantityInputElement.value = cartItem.count;  // Update the input value for quantity.
+  cartItem.count = count || ++cartItem.count;    // Update product quantity
+  quantityInputElement.value = cartItem.count;    // Update display value
 
-  calculateTotalPrice();  // Recalculate the total price based on updated quantity.
-  saveDataLocalStorage();  // Save updated data to LocalStorage.
-}
+  calculateTotalPrice();    // Recalculate total price
+  saveDataLocalStorage();   // Save changes
+};
 
-// Event listeners
-window.addEventListener("load", showStoreProducts); // Display products when page loads.
-removeAllBtn.addEventListener("click", removeAllProduct); // Add event listener to "Remove All" button.
+// Set up page event listeners
+window.addEventListener("load", showStoreProducts);    // Display products on page load
+removeAllBtn.addEventListener("click", removeAllProduct);    // Add event to remove all button
