@@ -83,11 +83,11 @@ assets/
 │
 ├── vendor/
 │   ├── bootstrap-5.3.3-dist/
-│   └── iziToast-master/
+│   ├── iziToast-master/
+│   └── sweetalert/
 │
 └── index.html
 README.md
-
 </pre>
 
 <h3>🛠️ نحوه اجرا</h3>
