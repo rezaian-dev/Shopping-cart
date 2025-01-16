@@ -10,6 +10,7 @@
     <li style="display: flex; align-items: center; margin-bottom: 8px;"><i class="fab fa-bootstrap" style="margin-right: 8px; font-size: 20px;"></i><b>بوت‌استرپ</b>: برای طراحی رابط کاربری واکنش‌گرا</li>
     <li style="display: flex; align-items: center; margin-bottom: 8px;"><i class="fab fa-js-square" style="margin-right: 8px; font-size: 20px;"></i><b>جاوااسکریپت</b>: برای مدیریت رفتار و تعاملات کاربری</li>
     <li style="display: flex; align-items: center; margin-bottom: 8px;"><i class="fab fa-font-awesome" style="margin-right: 8px; font-size: 20px;"></i><b>کتابخانه SweetAlert</b>: برای نمایش اعلان‌های جذاب و کاربرپسند</li>
+    <li style="display: flex; align-items: center; margin-bottom: 8px;"><i class="fab fa-font-awesome" style="margin-right: 8px; font-size: 20px;"></i><b>کتابخانه iziToast</b>: برای ایجاد پیام‌های اطلاع‌رسانی (toast notifications)</li>
 </ul>
 
 <h3>✨ ویژگی‌ها و امکانات</h3>
