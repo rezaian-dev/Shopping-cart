@@ -51,34 +51,43 @@
 <h3>📂 ساختار پروژه</h3>
 <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; direction: ltr; text-align: center;">
 shopping-cart
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   ├── fonts/
-│   │   ├── Poppins-Bold.ttf
-│   │   ├── Poppins-Light.ttf
-│   │   ├── Poppins-Medium.ttf
-│   │   ├── Poppins-Regular.ttf
-│   │   └── Poppins-SemiBold.ttf
-│   ├── Images/
-│   │   ├── logos/
-│   │   │   ├── Facebook-Logo.webp
-│   │   │   ├── Spotify-Logo.webp
-│   │   │   └── Youtube-Logo.webp
-│   │   └── products/
-│   │       ├── Album-1.webp
-│   │       ├── Album-2.webp
-│   │       ├── Album-3.webp
-│   │       ├── Album-4.webp
-│   │       ├── Coffee.webp
-│   │       └── Shirt.webp
+assets/
+│
+├── css/
+│   └── styles.css
+│
+├── fonts/
+│   ├── Poppins-Bold.ttf
+│   ├── Poppins-Light.ttf
+│   ├── Poppins-Medium.ttf
+│   ├── Poppins-Regular.ttf
+│   └── Poppins-SemiBold.ttf
+│
+├── Images/
+│   ├── logos/
+│   │   ├── Facebook-Logo.webp
+│   │   ├── Spotify-Logo.webp
+│   │   └── Youtube-Logo.webp
+│   │
+│   └── products/
+│       ├── Album-1.webp
+│       ├── Album-2.webp
+│       ├── Album-3.webp
+│       ├── Album-4.webp
+│       ├── Coffee.webp
+│       └── Shirt.webp
+│
 ├── js/
 │   ├── scripts.js
 │   └── store.js
+│
 ├── vendor/
-│   ├── bootstrap-5.3.3-dist/ 
-│   └── sweetalert.js
+│   ├── bootstrap-5.3.3-dist/
+│   └── iziToast-master/
+│
 └── index.html
+README.md
+
 </pre>
 
 <h3>🛠️ نحوه اجرا</h3>
